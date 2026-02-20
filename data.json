@@ -1,0 +1,19 @@
+{
+  "date": "2026년 2월 21일 토요일",
+  "english": {
+    "text": "Actually, Data Visualization is a key part of my workflow. I prefer using Python's Seaborn library because it's so user-friendly.",
+    "sub": "데이터 시각화는 제 업무의 핵심입니다. 파이썬의 Seaborn 라이브러리는 정말 사용하기 편하거든요."
+  },
+  "chinese": {
+    "text": "我们要提高工作效率。",
+    "sub": "우리는 업무 효율을 높여야 합니다."
+  },
+  "japanese": {
+    "text": "このプロジェクトの進捗状況を確認してください。",
+    "sub": "이 프로젝트의 진척 상황을 확인해 주세요."
+  },
+  "evening": [
+    "한능검: 구석기 vs 신석기 특징 비교 완료",
+    "데이터: SQL 정규화 중 BCNF 개념 복습"
+  ]
+}
