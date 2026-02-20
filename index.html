@@ -3,114 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>2026 Master Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
-        body { font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; background-color: #0f172a; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; transition: all 0.3s ease; }
-        .glass-card:active { transform: scale(0.98); background: rgba(51, 65, 85, 0.8); }
-        .btn-play { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
-        .nav-active { color: #60a5fa; position: relative; }
-        .nav-active::after { content: ''; position: absolute; bottom: -8px; width: 4px; height: 4px; background: #60a5fa; border-radius: 50%; }
-        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        .live-indicator { animation: pulse-soft 2s infinite; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #0f172a; color: white; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen pb-24 selection:bg-blue-500/30">
-
-    <header class="sticky top-0 z-50 p-6 pt-12 bg-[#0f172a]/80 backdrop-blur-xl">
-        <div class="flex justify-between items-end">
-            <div>
-                <h1 class="text-3xl font-extrabold tracking-tight">
-                    2026 Master <span class="text-blue-400">Archived</span>
-                </h1>
-                <p class="text-slate-500 text-sm mt-1 flex items-center">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2 live-indicator"></span>
-                    <span id="current-date"></span>
-                </p>
-            </div>
-            <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
-                <i class="fa-solid fa-user text-xs text-slate-400"></i>
-            </div>
-        </div>
+<body class="pb-24">
+    <header class="p-6 pt-12">
+        <h1 class="text-3xl font-extrabold">2026 Master <span class="text-blue-400">Archived</span></h1>
+        <p id="display-date" class="text-slate-500 text-sm mt-1">로딩 중...</p>
     </header>
 
-    <main class="px-6 mt-4 space-y-8">
-        
-        <section>
-            <div class="flex items-center justify-between mb-5">
-                <h2 class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] flex items-center">
-                    <i class="fa-solid fa-cloud-sun mr-2 text-blue-400"></i> Morning Library <span class="ml-2 text-slate-600 font-medium">08:30</span>
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-1 gap-4">
-                <div class="glass-card p-5 relative group">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-lg">🇺🇸</span>
-                            <span class="text-[10px] font-bold text-blue-400 tracking-wider">ENGLISH IH</span>
-                        </div>
-                        <button onclick="speak('Actually, Python is my go-to language for data analysis because of its extensive libraries like Pandas and Scikit-learn.', 'en-US')" class="btn-play w-10 h-10 rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-play text-xs text-white"></i>
-                        </button>
-                    </div>
-                    <p class="text-lg font-semibold leading-tight mb-2">"Actually, Python is my go-to language for data analysis..."</p>
-                    <p class="text-xs text-slate-500 font-medium">파이썬은 데이터 분석에 있어 가장 핵심적인 도구입니다.</p>
+    <main class="px-6 space-y-8">
+        <section id="morning-section">
+            <h2 class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">Morning Library (08:30)</h2>
+            <div id="cards-container" class="space-y-4">
                 </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="glass-card p-5">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-sm">🇨🇳</span>
-                            <button onclick="speak('虽然这些数据很多，但是我们可以进行分析。', 'zh-CN')" class="text-slate-400 hover:text-red-400"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                        <p class="text-sm font-bold mb-1 truncate">虽然这些数据很多...</p>
-                        <p class="text-[10px] text-slate-500">데이터가 많아도 분석 가능합니다.</p>
-                    </div>
-                    <div class="glass-card p-5">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-sm">🇯🇵</span>
-                            <button onclick="speak('データ分析を担当しています。', 'ja-JP')" class="text-slate-400 hover:text-emerald-400"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                        <p class="text-sm font-bold mb-1 truncate">担当しています</p>
-                        <p class="text-[10px] text-slate-500">분석을 담당하고 있습니다.</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <section>
-            <h2 class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-5 flex items-center">
-                <i class="fa-solid fa-moon mr-2 text-indigo-400"></i> Evening Archive <span class="ml-2 text-slate-600 font-medium">18:30</span>
-            </h2>
-            <div class="glass-card p-6 bg-indigo-500/5 border-indigo-500/20">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="p-2 bg-indigo-500/20 rounded-lg"><i class="fa-solid fa-pen-nib text-indigo-400 text-sm"></i></div>
-                    <span class="text-sm font-bold">오답 노트 & 동호회</span>
-                </div>
-                <ul class="space-y-3 text-xs text-slate-400">
-                    <li class="flex items-start"><span class="text-indigo-500 mr-2">•</span> <span>한능검: 선사시대 유물 및 국가 기틀 완벽 정리</span></li>
-                    <li class="flex items-start"><span class="text-indigo-500 mr-2">•</span> <span>SQLP: Index 가공 시 Range Scan 범위 제한 학습</span></li>
-                </ul>
+        <section id="evening-section">
+            <h2 class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">Evening Archive (18:30)</h2>
+            <div class="glass-card p-6 border-indigo-500/20">
+                <ul id="evening-list" class="space-y-3 text-xs text-slate-400">
+                    </ul>
             </div>
         </section>
     </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 glass-card mx-6 my-6 p-4 flex justify-around items-center z-50">
-        <button class="nav-active"><i class="fa-solid fa-house-chimney"></i></button>
-        <button class="text-slate-600"><i class="fa-solid fa-chart-pie"></i></button>
-        <button class="text-slate-600"><i class="fa-solid fa-calendar"></i></button>
-        <button class="text-slate-600"><i class="fa-solid fa-gear"></i></button>
-    </nav>
-
     <script>
-        const now = new Date();
-        document.getElementById('current-date').innerText = now.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) + ' ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+
+                // 날짜 업데이트
+                document.getElementById('display-date').innerText = data.date;
+
+                // 카드 생성 (영어, 중국어, 일본어)
+                const container = document.getElementById('cards-container');
+                container.innerHTML = `
+                    <div class="glass-card p-5">
+                        <div class="flex justify-between mb-4"><span>🇺🇸 ENGLISH IH</span>
+                        <button onclick="speak('${data.english.text}', 'en-US')" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center"><i class="fa-solid fa-play"></i></button></div>
+                        <p class="text-lg font-bold mb-2">"${data.english.text}"</p>
+                        <p class="text-xs text-slate-500">${data.english.sub}</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-5">
+                            <button onclick="speak('${data.chinese.text}', 'zh-CN')" class="mb-2 text-red-400"><i class="fa-solid fa-volume-high"></i> 🇨🇳</button>
+                            <p class="text-sm font-bold truncate">${data.chinese.text}</p>
+                            <p class="text-[10px] text-slate-500">${data.chinese.sub}</p>
+                        </div>
+                        <div class="glass-card p-5">
+                            <button onclick="speak('${data.japanese.text}', 'ja-JP')" class="mb-2 text-emerald-400"><i class="fa-solid fa-volume-high"></i> 🇯🇵</button>
+                            <p class="text-sm font-bold truncate">${data.japanese.text}</p>
+                            <p class="text-[10px] text-slate-500">${data.japanese.sub}</p>
+                        </div>
+                    </div>
+                `;
+
+                // 저녁 목록 업데이트
+                const eveningList = document.getElementById('evening-list');
+                eveningList.innerHTML = data.evening.map(item => `<li>• ${item}</li>`).join('');
+
+            } catch (error) {
+                console.error('데이터를 불러오지 못했습니다:', error);
+            }
+        }
 
         function speak(text, lang) {
             window.speechSynthesis.cancel();
@@ -119,6 +82,8 @@
             utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
         }
+
+        loadData();
     </script>
 </body>
 </html>
